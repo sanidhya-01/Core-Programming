@@ -1,22 +1,31 @@
-import java.util.Scanner;
-
 public class PalindromeChecker {
+    private String text;
 
-    public static boolean isPalindrome(String str) {
-        int left = 0, right = str.length() - 1;
+    public PalindromeChecker(String text) {
+        this.text = text;
+    }
+
+    public boolean isPalindrome() {
+        String cleaned = text.replaceAll("\\s+", "").toLowerCase();
+        int left = 0, right = cleaned.length() - 1;
         while (left < right) {
-            if (str.charAt(left) != str.charAt(right)) return false;
+            if (cleaned.charAt(left) != cleaned.charAt(right)) return false;
             left++;
             right--;
         }
         return true;
     }
 
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter string to check palindrome: ");
-        String str = input.nextLine();
+    public void displayResult() {
+        System.out.println("Text: " + text);
+        if (isPalindrome()) System.out.println("Result: Palindrome");
+        else System.out.println("Result: Not a Palindrome");
+    }
+}
 
-        System.out.println(str + (isPalindrome(str) ? " is a Palindrome." : " is NOT a Palindrome."));
+class Main {
+    public static void main(String[] args) {
+        PalindromeChecker checker = new PalindromeChecker("Madam");
+        checker.displayResult();
     }
 }
